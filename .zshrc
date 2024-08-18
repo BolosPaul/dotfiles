@@ -75,6 +75,6 @@ function sk-select-history() {
 zle -N sk-select-history
 
 # Source Git aliases
-if [ -f ~/.zsh/git-aliases.zsh ]; then
-  source ~/.zsh/git-aliases.zsh
+if [ -f ~/zsh/git-aliases.zsh ]; then
+  source ~/zsh/git-aliases.zsh
 fi

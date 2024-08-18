@@ -1,4 +1,4 @@
-# Git aliases
+# Git aliase definitions
 alias g='git'
 alias ga='git add'
 alias gaa='git add --all'
@@ -28,7 +28,7 @@ alias gcb='git checkout -b'
 alias gcf='git config --list'
 alias gcl='git clone --recurse-submodules'
 alias gclean='git clean -fd'
-alias gcm='git checkout master'
+alias gcm='git commit -m'
 alias gco='git checkout'
 alias gcount='git shortlog -sn'
 alias gcp='git cherry-pick'
