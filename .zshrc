@@ -32,6 +32,7 @@ autoload -Uz compinit && compinit
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
+bindkey '^r' sk-select-histor
 
 # History
 HISTSIZE=5000
@@ -72,5 +73,8 @@ function sk-select-history() {
 }
 
 zle -N sk-select-history
-bindkey '^R' sk-select-history
 
+# Source Git aliases
+if [ -f ~/.zsh/git-aliases.zsh ]; then
+  source ~/.zsh/git-aliases.zsh
+fi
