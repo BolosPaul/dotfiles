@@ -32,7 +32,14 @@ autoload -Uz compinit && compinit
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
-bindkey '^r' sk-select-histor
+bindkey '^r' sk-select-history
+
+bindkey "\e[1;5C" forward-word
+bindkey "\e[1;5D" backward-word
+bindkey "\e[5C" forward-word
+bindkey "\e[5D" backward-word
+bindkey "\e\e[C" forward-word
+bindkey "\e\e[D" backward-word
 
 # History
 HISTSIZE=5000
@@ -58,6 +65,24 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 alias ls='ls --color'
 alias vim='nvim'
 alias c='clear'
+alias git-reinit="~/bin/git-reinit.sh"
+alias dcup="docker-compose up -d"
+alias dcupb="docker-compose up -d --build"
+alias dcd="docker-compose down --volumes --remove-orphans"
+alias ds='docker ps --filter "name=$(basename $(pwd))" --format "{{.ID}}" | xargs -r docker stop'
+alias cpcnt="xclip -sel c <"
+alias please="sudo"
+alias ramon_suge="echo da"
+alias ramon_da-i_sa_mearga="yarn dev"
+alias ramon_pleaca="exit"
+alias nvim="NVIM_APPNAME=lazyvim nvim"
+alias vim="nvim"
+
+# Tmux shortcuts
+alias tl="tmux list-session"
+alias ta="tmux attach-session -t"
+alias tn="tmux new-session -s"
+alias tx="tmux kill-session"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -78,3 +103,33 @@ zle -N sk-select-history
 if [ -f ~/zsh/git-aliases.zsh ]; then
   source ~/zsh/git-aliases.zsh
 fi
+
+export PATH="$HOME/bin:$PATH"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+export PATH="/usr/local/bin:$PATH"
+
+# Created by `pipx` on 2024-10-23 09:01:16
+export PATH="$PATH:/home/paul/.local/bin"
+export PATH="/home/linuxbrew/.linuxbrew/opt/node@22/bin:$PATH"
+
+#neovim
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
+#Scripts
+
+#Prepare development script
+alias fordino-dev='
+if [ -z "$TMUX" ]; then
+  tmux new-session -d -s main -c ~/Documents/Github/fordino/fordino-frontend
+  tmux send-keys -t main "yarn dev" Enter
+  tmux new-window -t main -c ~/Documents/Github/fordino/fordino-node-backend
+  tmux attach-session -t main
+else
+  tmux rename-session main 2>/dev/null
+  tmux send-keys -t main "cd ~/Documents/Github/fordino/fordino-frontend && yarn dev" Enter
+  tmux new-window -t main -c ~/Documents/Github/fordino/fordino-node-backend
+fi
+'
+alias gdlb="git fetch --prune && git branch -vv | awk '/: gone]/{print \$1}' | xargs -r git branch -d"
+
+
