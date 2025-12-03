@@ -100,7 +100,8 @@ alias gsps='git show --pretty=short --show-signature'
 alias gsr='git svn rebase'
 alias gss='git status -s'
 alias gst='git status'
-alias gsta='git stash push'
+alias gsta='git stash'
+alias gstap='git stash pop'
 alias gstall='git stash --all'
 alias gsts='git stash show --text'
 alias gsu='git submodule update'
@@ -114,4 +115,14 @@ alias gupav='git pull --rebase --autostash -v'
 alias gupv='git pull --rebase -v'
 alias gwc='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git ls-files --deleted -z | xargs -r0 git rm --cached; git commit -m "--wip-- [skip ci]"'
+alias gprune="git fetch --prune && git branch -vv | awk '/: gone]/{print $1}' | xargs -r git branch -d"
+alias glog="git log -n 10 --oneline --decorate --graph"
+nuke-codex() {
+  # delete all local codex/* branches
+  git branch | grep '^  codex/' | xargs -r git branch -D
+
+  # delete all remote codex/* branches
+  git branch -r | grep 'origin/codex/' | sed 's|origin/||' |
+  xargs -r -I {} git push origin --delete {}
+}
 
