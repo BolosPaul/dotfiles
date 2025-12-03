@@ -1,0 +1,7 @@
+[user]
+	email = bolospaul7@gmail.com
+	name = Bolos Paul
+[init]
+	defaultBranch = main
+[alias]
+	lga = log --oneline --decorate --graph --pretty=format:'%h %s — %an'
